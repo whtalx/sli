@@ -1,53 +1,132 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  user-select: none;
-
-  --card: 300px;
-  --halfgap: 30px;
+  background-color: #dedede;
 }
 
-#slider-wrapper {
+.slider {
   position: absolute;
-  left: calc(50% - (var(--card) + var(--halfgap)));
-  top: calc(50% - var(--card) / 2);
-  width: calc((var(--card) + var(--halfgap)) * 2);
-  height: var(--card);
+  left: calc(50% - 450px);
+  top: calc(50% - 347px);
+  width: 900px;
+  height: 694px;
   overflow: hidden;
 }
 
-#slider {
+.slider:after {
+  content: '';
   position: absolute;
-  left: calc((var(--card) / 2 + var(--halfgap)) * -1);
-  display: flex;
-  flex-flow: row;
-  width: max-content;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  box-shadow:
+    inset 0 -30px 20px -20px #dedede,
+    inset 0 30px 20px -20px #dedede;
 }
 
-.card {
-  margin: 0 var(--halfgap);
-  width: var(--card);
-  height: var(--card);
-  color: #444;
-  font-size: 150px;
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column;
+}
+
+.container.big {
+  transform: translateY(0%);
+  transition: transform .48s ease-out;
+}
+
+.container.smol {
+  transform: translateY(0%);
+  transition: transform .64s ease;
+}
+
+.slide {
+  position: relative;
+  width: 900px;
+  height: 694px;
+}
+
+img {
+  border-radius: 20px;
+  box-shadow: 0px 15px 22px rgba(44, 22, 88, 0.3);
+}
+
+.img-big {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+}
+
+.img-smol {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+}
+
+.controls {
+  position: absolute;
+  left: calc(50% - 580px);
+  top: 0;
+  width: 130px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  margin: 50px 0;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: default;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color .16s;
+  box-shadow: inset -1px -1px 2px #ddd;
 }
 
-.card:first-child {
-  margin-left: 0;
+label:after {
+  content: '';
+  display: none;
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border-radius: 50%;
 }
 
-.card:last-child {
-  margin-right: 0;
+label:hover {
+  background-color: #bbb;
 }
 
-.card.center {
-  position: relative;
+input:nth-child(1):checked ~ .controls label:nth-child(1):after,
+input:nth-child(2):checked ~ .controls label:nth-child(2):after,
+input:nth-child(3):checked ~ .controls label:nth-child(3):after,
+input:nth-child(4):checked ~ .controls label:nth-child(4):after {
+  display: block;
+}
+
+input:nth-child(1):checked ~ .slider .container {
+  transform: translateY(0%);
+}
+
+input:nth-child(2):checked ~ .slider .container {
+  transform: translateY(-25%);
+}
+
+input:nth-child(3):checked ~ .slider .container {
+  transform: translateY(-50%);
+}
+
+input:nth-child(4):checked ~ .slider .container {
+  transform: translateY(-75%);
 }
